@@ -1,76 +1,207 @@
-C: Ctrl
-S: Shift
-A: Alt
-\s: space
+# 調査
+**定義移動**
+F12
+**定義表示**
+Alt + F12
+**参照表示**
+Shift + F12
+**ホバー情報表示**
+gh
 
-# おすすめ設定
-## 拡張機能
+## フォーカス移動
+**サイドバー**
+Ctrl + 0
+**エディタグループN**
+Ctrl + [1-8]
+**ターミナル**
+Ctrl + @
+
+## パネル
+Ctrl + b: サイドバー 表示・非表示
+Ctrl + Shift + e: エクスプローラーへ移動
+
+## search
+**全検索**
+Ctrl + Shift + f
+**全検索 次・前に移動**
+F4、Shift + F4
+**全検索 履歴表示** 
+入力フィールド内で Alt + ↑↓
+
+**シンボル名検索（アウトライン表示）**
+Ctrl + Shift + o
+Ctrl + Shift + o:
+
+**ファイル名検索(quick open)**
+Ctrl + p
+
+# Edit
+F12: 定義へ移動
+Alt + [<-,->]: 遷移前へ移動、遷移後へ移動
+Ctrl + Space: インテリセンス（入力補完）
+
+**キーワードを含む行を削除**
+Ctrl f で検索
+Alt Enter で全選択
+Ctrl Shift k で行削除
+
+**キーワードを文字やタグで囲む**
+選択範囲上で Shift + ["'(){}[]<>]
+
+**コードフォーマット 整形**
+JSON整形も可能
+Shift + Alt + f
+
+**マルチカーソル**
+Alt + Ctrl + ↑↓
+Alt + クリック
+
+## 全体
+Ctrl + Shift + p: 便利コマンド
+Ctrl + .: コードアクション？
+
+Ctrl + k, Ctrl + s: ショートカット一覧
+
+F11: 全画面表示切替
+
+# favorite settings
+定期的にショートカットやコマンド、設定ファイル、プラグインを調べると良い。
+
+## extentions
 vim
 Github Copilot
 
 ## ショートカット変更
-**Focus on outline view** Ao
+**Focus on outline view** Alt + o
 
-# 調査
-## フォーカス移動
-**サイドバー**
-C0
-**エディタグループN**
-C1〜C8
-**ターミナル**
-C@
+## vim拡張
+[vim.md](./vim.md)
 
-## パネル
-Cb: サイドバー 表示・非表示
-CSe: エクスプローラーへ移動
+Ctrl + c: vimのインサートモードからコマンドモードへ
 
-C@: シェルウィンドウ表示・非表示 起動していなければ起動
+**定義へ移動**
+gd
+**選択範囲拡大**
+(VisualMode)af
+**カーソル位置の単語選択（複数回押すとマルチカーソル）**
+gb
+**Visualモードで行末まで選択**
+g_
+**Visualモードでサラウンド**
+S["'[](){}]
+ds["'[](){}]
+ys[motion]["'[](){}]
+cs["'[](){}]["'[](){}]
 
+### エクスプローラー
+|内容|key|
+|---|---|
+|上下移動|k, j|
+|上下に大きく移動|Ctrl + u、Ctrl + d|
+|最上、最下|gg, G|
+|ツリー展開|o, h, l|
+|エクスプローラーにいるまま開く|o, Space|
+|開いてエディタへ移動|l|
+|検索。検索後はヒットしたもののみで移動可能(j,k)。<br />展開されていないフォルダは対象外。|Ctrl + f|
+|検索。gから始まる場合など挙動がおかしい。|/|
 
-## 検索
-**全検索**
-CSf
-**次・前に移動**
-F4、SF4
-**履歴表示** 
-入力フィールド内で A↑↓
+## 設定ファイル
+**settings.json**
+```json
+{
+    "workbench.tree.indent": 15,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
 
-**シンボル名検索** この後に名前の一部をタイプする
-Ct
-
-**ファイル名検索** この後に名前の一部をタイプする
-Cp
-
-## アウトライン（移動）
-**シンボル一覧**
-CSo
-**シンボル並び替え**
-CSo:
-###アウトライン画面（vim拡張）
-o で展開
-Cu、Cdで上下に大きく移動
-
-
-# Edit
-F12: 定義へ移動
-A<- A->: 遷移前へ移動、遷移後へ移動
-C\s: インテリセンス（入力補完）
-
-**コードフォーマット 整形**
-SAf
-
-**マルチカーソル**
-AC↑↓
-Aクリック
-
-## 
-Cp: 便利コマンド
-CSp: >便利コマンド
-C.: コードアクション？
-
-CkCs: ショートカット一覧
-
-F11: 全画面表示切替
-
-## vimと
-Cc: vimのインサートモードからコマンドモードへ
+    // vim設定
+    // "vim.vimrc.enable": true,
+    // "vim.vimrc.path": "~/.vimrc",
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true, // クリップボードを使う
+    "vim.sneak": true,
+    "vim.foldfix": true, // 折りたたみを修正
+    "vim.enableNeovim": true, // neovimを有効化
+    "vim.leader": "<space>", // leaderキーを設定
+    "vim.easymotion": true,
+    "vim.insertModeKeyBindingsNonRecursive": [
+        { "before": [ "j", "f" ], "after": [ "<Esc>" ] },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": [ "<C-p>" ], "commands": [ "workbench.action.quickOpen" ] },
+        // 移動補助
+        { "before": ["K"], "after": ["5", "k"] },
+        { "before": ["J"], "after": ["5", "j"] },
+        { "before": [ "<leader>", "h" ], "after": [ "^" ] },
+        { "before": [ "<leader>", "l" ], "after": [ "$" ] },
+        { "before": [ "<leader>", "m" ], "after": [ "%" ] },
+        // 検索対象を画面中央に表示
+        { "before": [ "n" ], "after": [ "n", "z", "z" ] },
+        { "before": [ "N" ], "after": [ "N", "z", "z" ] },
+        { "before": [ "*" ], "after": [ "*", "z", "z" ] },
+        { "before": [ "#" ], "after": [ "#", "z", "z" ] },
+        // カーソル位置の単語をマルチカーソルで選択
+        { "before": [ "<C-n>" ], "after": [ "g", "b" ] },
+        // ハイライト除去
+        { "before": [ "<leader>", "\/" ], "commands": [ ":noh" ] },
+        // ワークスペース内シンボル検索
+        { "before": [ "<leader>", "t" ], "commands": [ "workbench.action.showAllSymbols" ] },
+        // 変数の参照箇所の表示
+        { "before": [ "g", "f" ], "commands": [ "editor.action.referenceSearch.trigger" ] },
+        // 左タブへ移動
+        { "before": ["C-h"], "commands": [ "workbench.action.previousEditor" ] },
+        // 右タブへ移動
+        { "before": ["C-l"], "commands": [ "workbench.action.nextEditor" ] },
+        // タブを左に移動
+        { "before": ["<leader>", "<"], "commands": [ ":tabm -1" ] },
+        // タブを右に移動
+        { "before": ["<leader>", ">"], "commands": [ ":tabm +1" ] },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        // 移動補助
+        { "before": ["K"], "after": ["5", "k"] },
+        { "before": ["J"], "after": ["5", "j"] },
+        { "before": [ "<leader>", "h" ], "after": [ "^" ] },
+        { "before": [ "<leader>", "l" ], "after": [ "$" ] },
+        { "before": [ "<leader>", "m" ], "after": [ "%" ] },
+        // カーソル位置の単語をマルチカーソルで選択
+        { "before": [ "<C-n>" ], "after": [ "g", "b" ] },
+    ],
+}
+```
+**keybindings.json**
+```json
+[
+    // コマンドパレットや補完の上下移動
+    {
+        "key": "ctrl+n",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen",
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen ",
+    },
+    // ターミナルのフォーカス移動
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    }
+]
+```

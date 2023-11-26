@@ -70,3 +70,7 @@ JavaScriptの委譲は、呼び出し元で評価されるため、プロパテ�
 # DOM
 * HTMLをツリー構造で扱う。
 * 要素ノード（element）、属性ノード、テキストノードを取得して各ノードを操作する。
+
+# 構文解析
+acorn, esprimaではコメントは取得できなかった。
+@babel-parser, typescript, jsdocではコメント取得可能。
